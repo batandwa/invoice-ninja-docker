@@ -19,3 +19,5 @@ web:
     - app
   ports:
     - 80
+  environment:
+    VIRTUAL_HOST: invoiceninja.tools.batandwa.me
