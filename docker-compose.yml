@@ -4,7 +4,7 @@ db:
     MYSQL_DATABASE: ninja
     MYSQL_ROOT_PASSWORD: mdp
   volumes:
-    ./mysqlconf.d:/etc/mysql/conf.d
+    - ./mysqlconf.d:/etc/mysql/conf.d
 
 app:
   image: lalop/invoice-ninja:2.4.6
