@@ -1,0 +1,22 @@
+db:
+  extends:
+    file: docker-compose-common.yml
+    service: db
+  env_file:
+    - config/dev.env
+
+app:
+  extends:
+    file: docker-compose-common.yml
+    service: app
+  links:
+    - db:mysql
+
+web:
+  extends:
+    file: docker-compose-common.yml
+    service: app
+  links:
+    - app
+  env_file:
+    - config/dev.env

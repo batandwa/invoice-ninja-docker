@@ -1,25 +1,16 @@
 db:
   image: mysql
-  environment:
-    MYSQL_DATABASE: ninja
-    MYSQL_ROOT_PASSWORD: mdp
   volumes:
     - ./mysqlconf.d:/etc/mysql/conf.d
 
 app:
   image: lalop/invoice-ninja:2.4.6
-  links:
-    - db:mysql
 
 web:
   image: nginx
   volumes:
     - ./nginx.conf:/etc/nginx/nginx.conf:ro
-  links:
-    - app
   volumes_from:
     - app
   ports:
     - 80
-  environment:
-    VIRTUAL_HOST: invoiceninja.tools.batandwa.me
