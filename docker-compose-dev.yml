@@ -3,7 +3,7 @@ db:
     file: docker-compose-common.yml
     service: db
   env_file:
-    - config/dev.env
+    - config/db.dev.env
 
 app:
   extends:
@@ -15,8 +15,10 @@ app:
 web:
   extends:
     file: docker-compose-common.yml
-    service: app
+    service: web
   links:
     - app
+  volumes_from:
+    - app
   env_file:
-    - config/dev.env
+    - config/web.dev.env
