@@ -5,12 +5,20 @@ db:
   env_file:
     - config/db.dev.env
 
+smtp:
+  extends:
+    file: docker-compose-common.yml
+    service: smtp
+  env_file:
+    - config/smtp.dev.env
+
 app:
   extends:
     file: docker-compose-common.yml
     service: app
   links:
     - db:mysql
+    - smtp:smtp
 
 web:
   extends:
