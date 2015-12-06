@@ -5,11 +5,15 @@ db:
     - ./mysql_data:/var/lib/mysql
     - ./mysql_initdb:/docker-entrypoint-initdb.d
 
-
 smtp:
   image: openseamap/smtp-docker
   ports:
     - 25
+
+phpmyadmin:
+  image: nazarpc/phpmyadmin
+  ports:
+    - 80
 
 app:
   image: lalop/invoice-ninja:2.4.6

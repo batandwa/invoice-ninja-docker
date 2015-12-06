@@ -3,14 +3,14 @@ db:
     file: docker-compose-common.yml
     service: db
   env_file:
-    - config/db.dev.env
+    - config/db.prod.env
 
 smtp:
   extends:
     file: docker-compose-common.yml
     service: smtp
   env_file:
-    - config/smtp.dev.env
+    - config/smtp.prod.env
 
 phpmyadmin:
   extends:
@@ -19,7 +19,7 @@ phpmyadmin:
   links:
     - db:mysql
   env_file:
-    - config/phpmyadmin.dev.env
+    - config/phpmyadmin.prod.env
 
 app:
   extends:
@@ -38,4 +38,4 @@ web:
   volumes_from:
     - app
   env_file:
-    - config/web.dev.env
+    - config/web.prod.env
