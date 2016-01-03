@@ -11,7 +11,7 @@ smtp:
     - 25
 
 phpmyadmin:
-  image: nazarpc/phpmyadmin
+  image: corbinu/docker-phpmyadmin
   ports:
     - 80
 
@@ -26,3 +26,4 @@ web:
     - ./nginx.conf:/etc/nginx/nginx.conf:ro
   ports:
     - 80
+    - 443
