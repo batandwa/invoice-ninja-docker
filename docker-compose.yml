@@ -4,26 +4,41 @@ db:
     - ./mysqlconf.d:/etc/mysql/conf.d
     - ./mysql_data:/var/lib/mysql
     - ./mysql_initdb:/docker-entrypoint-initdb.d
+  env_file:
+    - config/db.env
 
 smtp:
+  env_file:
+    - config/smtp.env
   image: openseamap/smtp-docker
   ports:
     - 25
 
 phpmyadmin:
   image: corbinu/docker-phpmyadmin
+  links:
+    - db:mysql
   ports:
     - 80
+  env_file:
+    - config/phpmyadmin.env
 
 app:
   image: lalop/invoice-ninja:2.4.6
+  links:
+    - db:mysql
+    - smtp:smtp
   volumes:
     - ./config/appconf.env:/var/www/app/.env
 
 web:
   image: nginx
+  links:
+    - app
   volumes:
     - ./nginx.conf:/etc/nginx/nginx.conf:ro
   ports:
     - 80
     - 443
+  env_file:
+    - config/web.env
