@@ -1,1 +1,4 @@
 data
+mysql_data
+config/*.env
+mysql_initdb/*.sql
