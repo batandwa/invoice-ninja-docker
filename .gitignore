@@ -2,3 +2,4 @@
 /config/*.env
 /mysql_data
 /mysql_initdb/*.sql
+/junk
