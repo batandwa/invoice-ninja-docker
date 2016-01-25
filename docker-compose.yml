@@ -8,11 +8,12 @@ db:
     - config/db.env
 
 smtp:
-  env_file:
-    - config/smtp.env
   image: openseamap/smtp-docker
+  # image: catatnight/postfix
   ports:
     - 25
+  env_file:
+    - config/smtp.env
 
 phpmyadmin:
   image: corbinu/docker-phpmyadmin
@@ -24,12 +25,14 @@ phpmyadmin:
     - config/phpmyadmin.env
 
 app:
-  image: lalop/invoice-ninja:2.4.6
+  build: .
   links:
     - db:mysql
     - smtp:smtp
   volumes:
     - ./config/appconf.env:/var/www/app/.env
+  env_file:
+    - config/app.env
 
 web:
   image: nginx
