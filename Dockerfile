@@ -1,4 +1,5 @@
-FROM php:fpm
+# FROM php:fpm
+FROM php:5.6-apache
 
 #####
 # SYSTEM REQUIREMENT
@@ -49,6 +50,7 @@ EXPOSE 80
 
 COPY app-entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
+RUN a2ensite 000-default
 
 ENTRYPOINT ["/entrypoint.sh"]
-CMD ["php-fpm"]
+CMD ["apache2-foreground"]

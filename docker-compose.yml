@@ -30,18 +30,23 @@ app:
     - db:mysql
     - smtp:smtp
   volumes:
+    - ./config/default_site.conf:/etc/apache2/sites-available/000-default.conf
     - ./config/appconf.env:/var/www/app/.env
   env_file:
     - config/app.env
-
-web:
-  image: nginx
-  links:
-    - app
-  volumes:
-    - ./nginx.conf:/etc/nginx/nginx.conf:ro
   ports:
     - 80
-    - 443
-  env_file:
-    - config/web.env
+  command:
+    - 'apache2-foreground'
+
+# web:
+#   image: nginx
+#   links:
+#     - app
+#   volumes:
+#     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+#   ports:
+#     - 80
+#     - 443
+#   env_file:
+#     - config/web.env
